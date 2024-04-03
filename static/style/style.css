@@ -49,8 +49,8 @@ body, html {
 .image-content {
     flex: 1;
     max-width: 45%;
-    min-height: 200px; /* Ensures that the div has a minimum height */
-    background: url('/static/images/homepage-bg.jpg') center center / cover no-repeat;
+    min-height: 350px; /* Ensures that the div has a minimum height */
+    background: url('/static/images/homepage-bg.webp') center center / cover no-repeat;
     border-radius: 8px;
 }
 
