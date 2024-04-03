@@ -11,3 +11,8 @@
 2024-04-03 16:17:59,439 INFO: Your application startup [in /home/cedric/Projects/baby/app.py:39]
 2024-04-03 16:17:59,444 INFO: Your application startup [in /home/cedric/Projects/baby/app.py:39]
 2024-04-03 16:17:59,517 INFO: Your application startup [in /home/cedric/Projects/baby/app.py:39]
+2024-04-03 16:26:55,074 INFO: Your application startup [in /home/cedric/Projects/baby/app.py:37]
+2024-04-03 16:26:55,163 INFO: Your application startup [in /home/cedric/Projects/baby/app.py:37]
+2024-04-03 16:26:55,235 INFO: Your application startup [in /home/cedric/Projects/baby/app.py:37]
+2024-04-03 16:26:55,307 INFO: Your application startup [in /home/cedric/Projects/baby/app.py:37]
+2024-04-03 16:26:59,596 INFO: Access from IP: 127.0.0.1, Browser: None, Platform: None, User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36 Edg/123.0.0.0 [in /home/cedric/Projects/baby/app.py:102]

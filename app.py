@@ -95,6 +95,11 @@ def get_random_names():
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
+    user_ip = request.remote_addr
+    user_agent = request.user_agent.string
+    browser = request.user_agent.browser
+    platform = request.user_agent.platform
+    app.logger.info(f"Access from IP: {user_ip}, Browser: {browser}, Platform: {platform}, User Agent: {user_agent}")
     if request.method == 'POST':
         # Extract form data
         category = request.form.get('categorySelection')
