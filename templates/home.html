@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Baby Name Suggestions</title>
+    <link rel="stylesheet" href="/static/style/style.css">
+</head>
+<body>
+    <div class="main-container">
+        <div class="main-content">
+            <div class="homepage">
+                <h1>Welcome to Our Baby Naming Adventure! 👶🍼</h1>
+                <div class="content-container">
+                    <div class="text-content">
+                        <p>We are thrilled to announce that we are expecting a little boy! 
+                            As we prepare for his arrival, one of the biggest joys (and challenges) we face is choosing the perfect name for him.
+                            This is where we need your help.</p>
+                        <p>That's why we've created this platform - to gather name suggestions from our beloved friends and family.</p>
+                        <button onclick="scrollToForm()">Suggest a Name for Our Boy 🍼</button>
+                    </div>
+                    <div class="image-content"></div>
+                </div>
+            </div>
+        </div>
+        <div class="center-content">
+            <div class="left-content">
+                <div class="forms-container">
+                    <form id="nameSuggestionFormContent" action="/" method="POST">
+                        <div class="form-group">
+                            <label for="categorySelection">Category</label>
+                            <select id="categorySelection" name="categorySelection" required>
+                                <option value="">--Please choose an option--</option>
+                                <option value="kinyarwanda">Kinyarwanda Name</option>
+                                <option value="general">General Name</option>
+                            </select>
+                        </div>
+                    
+                        <div class="form-group">
+                            <label for="nameSuggestion">Name Suggestion</label>
+                            <input type="text" id="nameSuggestion" name="nameSuggestion" required>
+                        </div>
+                    
+                        <div class="form-group">
+                            <label for="meaningReason">Meaning/Reason (Optional)</label>
+                            <textarea id="meaningReason" name="meaningReason"></textarea>
+                        </div>
+                    
+                        <div class="form-group">
+                            <label for="yourName">Your Name</label>
+                            <input type="text" id="yourName" name="yourName" required>
+                        </div>
+                    
+                        <button type="submit">Submit</button>
+                    </form>                      
+                </div>
+            </div> 
+            <div class="right-content">
+                <div id="topUpvotedNames">
+                    <h2>Top Upvoted Names</h2>
+                    <div class="categories">
+                        <div class="category">
+                            <h3>General Names</h3>
+                            <ul id="topGeneralNames">
+                                {% for name in top_general %}
+                                    <li>
+                                        <div class="name name-entry" data-name-id="{{ name.id }}">
+                                            <span class="name">{{ name.name_suggestion }} ({{ name.upvotes }} upvotes)</span>
+                                            <button class="upvote-button">👍</button>
+                                        </div>                                        
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <div class="category">
+                            <h3>Kinyarwanda Names</h3>
+                            <ul id="topKinyarwandaNames">
+                                {% for name in top_kinyarwanda %}
+                                    <li>
+                                        <div class="name name-entry" data-name-id="{{ name.id }}">
+                                            <span class="name">{{ name.name_suggestion }} ({{ name.upvotes }} upvotes)</span>
+                                            <button class="upvote-button">👍</button>
+                                        </div>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div> 
+            </div>            
+        </div>
+        <div class="suggestions-container">
+            <div id="kinyarwandaNames">
+                <h2>Suggested Kinyarwanda Names</h2>
+                <div class="names-grid">
+                    {% for name in random_kinyarwanda %}
+                        <div class="name-entry" data-name-id="{{ name.id }}">
+                            <span class="name">{{ name.name_suggestion }}</span>
+                            <button class="upvote-button">👍</button>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        
+            <div id="galleryOfSuggestions">
+                <h2>Suggested Names</h2>
+                <div class="names-grid">
+                    {% for name in random_general %}
+                        <div class="name-entry name" data-name-id="{{ name.id }}">
+                            <span class="name">{{ name.name_suggestion }}</span>
+                            <button class="upvote-button">👍</button>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="thank-you-note">
+            <p>Thank you to all our friends and family for your wonderful name suggestions and for sharing this joyful journey with us.</p>
+        </div>
+    </div>
+    </div>
+    
+        <!-- Modal -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div id="message-modal" class="modal error-modal">
+                    {% for category, message in messages %}
+                        <div class="error-modal-content {{ 'error-message' if category == 'error' else 'normal-message' }}">
+                            <p>{{ message }}</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+    <script>
+        function scrollToForm() {
+            document.getElementById('nameSuggestionFormContent').scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const modal = document.getElementById('message-modal');
+            if (modal) {
+                modal.style.display = 'block';
+
+                // Optional: Close the modal when clicking outside of it
+                window.onclick = function(event) {
+                    if (event.target === modal) {
+                        modal.style.display = 'none';
+                    }
+                }
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const upvoteButtons = document.querySelectorAll('.upvote-button');
+            upvoteButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault(); // Prevent default form submission if applicable
+                    const nameEntryDiv = button.closest('.name-entry');
+                    const nameId = nameEntryDiv.dataset.nameId;
+                    fetch(`/upvote/${nameId}`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json', // Ensure you're sending the request as JSON
+                            'Accept': 'application/json' // Explicitly tell the server you want JSON back
+                        }
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        // Optionally handle the success scenario
+                        window.location.reload(); // Reload to show flash messages
+                    })
+                    .catch(error => {
+                        console.error('There has been a problem with your fetch operation:', error);
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>

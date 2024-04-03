@@ -1,0 +1,394 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #E2F0CB;  /* Soft background for the whole page */
+}
+.main-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+}
+.main-content{
+    background-color: #ffffff; /* Soft background color for contrast */
+}
+
+
+.homepage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 20px 20px; /* Increased padding for more space */
+    width: 80%;
+    margin: auto;
+}
+
+.homepage h1 {
+    color: #333;
+    margin-bottom: 30px; /* More space below the headline */
+    font-size: 2.2rem; /* Larger font size for emphasis */
+    text-align: center;
+}
+
+.content-container {
+    display: flex;
+    width: 100%;
+    justify-content: space-between; /* Adjusts alignment */
+    align-items: center; /* Vertically centers content */
+}
+
+.text-content {
+    flex: 1;
+    max-width: 45%; /* Adjust width for text readability */
+    color: #555; /* Darker text for better readability */
+}
+
+.image-content {
+    flex: 1;
+    max-width: 45%;
+    min-height: 200px; /* Ensures that the div has a minimum height */
+    background: url('/static/images/homepage-bg.jpg') center center / cover no-repeat;
+    border-radius: 8px;
+}
+
+.homepage p {
+    font-size: 1.1rem; /* Slightly larger font size for readability */
+    line-height: 1.7; /* Increased line height for readability */
+    margin-bottom: 20px; /* Space between paragraphs */
+}
+
+.homepage button {
+    font-size: 1rem;
+    padding: 12px 24px; /* Larger button for easier clicking */
+    color: #FFF;
+    background-color: #007BFF; /* Brighter color for visibility */
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2); /* Shadow for depth */
+}
+
+.homepage button:hover {
+    background-color: #0056b3; /* Darker on hover for interaction feedback */
+    transform: translateY(-2px); /* Slight lift */
+}
+
+.center-content{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    justify-content: space-between;
+    width: 80%;
+    margin: auto;
+}
+
+.left-content{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    background-color: #ffffff; /* Optional: Set a different background color for the form */
+    border-radius: 10px;
+}
+
+.forms-container{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    width: 100%;
+}
+
+#nameSuggestionFormContent{
+    width: 100%;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle shadow for depth */
+}
+
+#nameSuggestionFormContent .nameSuggestion{
+    text-align: center;
+    font-weight: bold;
+}
+
+.form-group {
+    margin: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input[type="text"],
+textarea,
+select {
+    width: calc(100% - 20px); /* Adjust width to account for padding */
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+textarea {
+    height: 50px;
+    resize: vertical;
+}
+
+button[type="submit"] {
+    font-size: 1em;
+    padding: 10px 20px;
+    color: #FFF;
+    background-color: #007BFF; /* Brighter color for visibility */
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: auto; /* Adjust as necessary */
+    display: block; /* Make the button a block element to center it */
+    margin: 0 auto; /* Center the button horizontally */
+}
+
+button[type="submit"]:hover {
+    background-color: #0056b3; /* Darker on hover for interaction feedback */
+    transform: translateY(-2px); /* Slight lift */
+}
+
+#kinyarwandaNames, 
+#galleryOfSuggestions {
+    flex: 1; /* Each section takes up equal space */
+    background-color: #A2D2FF;
+    border-radius: 10px;
+}
+
+.names-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Responsive grid */
+    gap: 20px;
+    padding: 20px;
+}
+
+.names-grid .name-entry {
+    background-color: #FFFFFF;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding-left: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.name {
+    font-weight: bold !important;
+}
+
+.upvote-button{
+    padding: 5px 5px;
+}
+
+.upvote-button:hover{
+    border-radius: 40%;
+    scale: 1.5;
+}
+
+.upvote-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+}
+
+@media (max-width: 768px) {
+    .suggestions-container {
+        flex-direction: column;
+    }
+}
+
+.suggestions-container{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    width: 80%;
+    margin: auto;
+    margin-bottom: 20px;
+}
+
+
+#kinyarwandaNames, 
+#galleryOfSuggestions {
+    flex: 1; /* Each section takes up equal space */
+    background-color: #A2D2FF;
+    border-radius: 10px;
+}
+
+#kinyarwandaNames h2, #galleryOfSuggestions h2{
+    text-align: center;
+}
+
+.names-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Responsive grid */
+    gap: 20px;
+    padding: 20px;
+}
+
+.name-entry {
+    background-color: #FFFFFF;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding-left: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.name {
+    font-weight: bold;
+}
+
+.upvote-button{
+    padding: 5px 5px;
+}
+
+.upvote-button:hover{
+    border-radius: 40%;
+    scale: 1.5;
+}
+
+.upvote-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+}
+
+@media (max-width: 768px) {
+    .suggestions-container {
+        flex-direction: column;
+    }
+}
+
+.right-content{
+    width: 100%;
+}
+
+#topUpvotedNames {
+    background-color: #A2D2FF;
+    padding-top: 10px;
+    text-align: center;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+#topUpvotedNames h2 {
+    color: #333;
+}
+
+.categories {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px;
+    gap: 10px;
+}
+
+.category ul {
+    list-style: none;
+    padding: 0;
+}
+
+.category h3{
+}
+
+.category li {
+    background-color: #A2D2FF;
+    border: 1px solid #ccc; /* Light border for definition */
+    border-radius: 5px; /* Slightly rounded corners for aesthetics */
+    padding-left: 5px;
+    margin-bottom: 10px; /* Space between items */
+    text-align: left;
+}
+
+@media (max-width: 768px) {
+    .categories {
+        flex-direction: column;
+    }
+    .center-content{
+        flex-direction: column;
+    }
+    .forms-container{
+        flex-direction: column;
+        width: 90%;
+    }
+}
+
+.thank-you-note {
+    text-align: center;
+    padding: 20px;
+    margin-top: 20px; /* Adds some space above the thank you note for visual separation */
+    margin-bottom: 20px;
+    background-color: #f0f4f8; /* A light background color for emphasis */
+    color: #333; /* Text color */
+    border-radius: 8px; /* Softens the corners for a friendly appearance */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Adds a subtle shadow for depth */
+    font-size: 0.9rem; /* Slightly smaller font size for the note */
+    max-width: 80%; /* Limits the width for better readability */
+    margin-left: auto; /* Centers the note horizontally */
+    margin-right: auto;
+}
+
+.thank-you-note p {
+    margin: 0; /* Adjusts paragraph default margin for a tidier look */
+}
+
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.error-modal-content {
+    background-color: #fefefe;
+    margin: 1% auto; /* 15% from the top and centered */
+    padding: 5px 10px;
+    border: 1px solid #888;
+    width: 300px;
+    border-radius: 8px; /* Optional: for rounded corners */
+}
+
+/* The Close Button */
+.close-button {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Message styles */
+.error-message {
+    color: #D8000C; /* Red color for error messages */
+    background-color: #FFD2D2; /* Light red background */
+}
+
+.normal-message {
+    color: #4F8A10; /* Green color for normal messages */
+    background-color: #DFF2BF; /* Light green background */
+}
