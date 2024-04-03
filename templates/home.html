@@ -103,7 +103,7 @@
             </div>
         
             <div id="galleryOfSuggestions">
-                <h2>Suggested Names</h2>
+                <h2>Suggested General Names</h2>
                 <div class="names-grid">
                     {% for name in random_general %}
                         <div class="name-entry name" data-name-id="{{ name.id }}">
@@ -132,7 +132,10 @@
                     <textarea id="contactMessage" name="contactMessage" required></textarea>
                 </div>
         
-                <button type="submit">Send Message</button>
+                <button type="submit">
+                    <span class="button-text">Send Message</span>
+                    <div class="spinner" style="display: none;"></div>
+                </button>                              
             </form>
         </div>        
         <div class="thank-you-note">
@@ -172,7 +175,15 @@
                 }
             }
         });
+        document.getElementById('contactForm').addEventListener('submit', function(event) {
+            const button = this.querySelector('button[type="submit"]');
+            const buttonText = button.querySelector('.button-text');
+            const spinner = button.querySelector('.spinner');
 
+            buttonText.style.display = 'none'; // Hide button text
+            spinner.style.display = 'inline-block'; // Show spinner
+            button.disabled = true; // Optional: Disable button to prevent multiple submits
+        });
         document.addEventListener('DOMContentLoaded', function() {
             const upvoteButtons = document.querySelectorAll('.upvote-button');
             upvoteButtons.forEach(button => {

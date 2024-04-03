@@ -363,7 +363,7 @@ button[type="submit"]:hover {
     margin: 1% auto; /* 15% from the top and centered */
     padding: 5px 10px;
     border: 1px solid #888;
-    width: 300px;
+    width: 400px;
     border-radius: 8px; /* Optional: for rounded corners */
 }
 
@@ -446,4 +446,25 @@ button[type="submit"] {
 
 button[type="submit"]:hover {
     background-color: #004494; /* Darker shade for hover effect */
+}
+
+.spinner {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border: 2px solid rgba(255, 255, 255, 0.6);
+    border-top-color: #fff; /* Color of spinner */
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-left: 8px; /* Space from text */
+    vertical-align: text-bottom; /* Align with button text */
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }
