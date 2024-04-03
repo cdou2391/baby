@@ -100,23 +100,32 @@ def home():
     browser = request.user_agent.browser
     platform = request.user_agent.platform
     app.logger.info(f"Access from IP: {user_ip}, Browser: {browser}, Platform: {platform}, User Agent: {user_agent}")
+    
     if request.method == 'POST':
         # Extract form data
         category = request.form.get('categorySelection')
         name_suggestion = request.form.get('nameSuggestion')
-        meaning_reason = request.form.get('meaningReason')
+        meaning_reason = request.form.get('meaningReason', '')  # Provide a default empty string if not present
         your_name = request.form.get('yourName')
-        # Create a new NameSuggestion instance
-        new_suggestion = NameSuggestion(
-            category=category,
-            name_suggestion=name_suggestion,
-            meaning_reason=meaning_reason,
-            your_name=your_name,
-            upvotes=0  # Default value
-        )
-        # Add new suggestion to the database
-        db.session.add(new_suggestion)
-        db.session.commit()
+
+        # Check if the name suggestion already exists for the given category
+        existing_suggestion = NameSuggestion.query.filter_by(category=category, name_suggestion=name_suggestion).first()
+        if existing_suggestion:
+            # Flash a message to the user about the duplicate
+            flash('This name suggestted has already been submitted.', 'error')
+        else:
+            # Create a new NameSuggestion instance and add it to the database
+            new_suggestion = NameSuggestion(
+                category=category,
+                name_suggestion=name_suggestion,
+                meaning_reason=meaning_reason,
+                your_name=your_name,
+                upvotes=0  # Default value
+            )
+            db.session.add(new_suggestion)
+            db.session.commit()
+            flash('Your name suggestion has been submitted successfully!', 'success')
+
         # Redirect to home to prevent form re-submission on refresh
         return redirect(url_for('home'))
     else:

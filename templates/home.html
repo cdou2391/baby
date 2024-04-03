@@ -32,7 +32,7 @@
                             <select id="categorySelection" name="categorySelection" required>
                                 <option value="">--Please choose an option--</option>
                                 <option value="kinyarwanda">Kinyarwanda Name</option>
-                                <option value="general">General Name</option>
+                                <option value="general">First Name</option>
                             </select>
                         </div>
                     
@@ -73,7 +73,7 @@
                             </ul>
                         </div>
                         <div class="category">
-                            <h3>General Names</h3>
+                            <h3>First Names</h3>
                             <ul id="topGeneralNames">
                                 {% for name in top_general %}
                                     <li>
@@ -103,7 +103,7 @@
             </div>
         
             <div id="galleryOfSuggestions">
-                <h2>Suggested General Names</h2>
+                <h2>Suggested First Names</h2>
                 <div class="names-grid">
                     {% for name in random_general %}
                         <div class="name-entry name" data-name-id="{{ name.id }}">
