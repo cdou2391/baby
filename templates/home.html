@@ -17,7 +17,7 @@
                             As we prepare for his arrival, one of the biggest joys (and challenges) we face is choosing the perfect name for him.
                             This is where we need your help.</p>
                         <p>That's why we've created this platform - to gather name suggestions from our beloved friends and family.</p>
-                        <button onclick="scrollToForm()">Suggest a Name for Our Boy 🍼</button>
+                        <button onclick="scrollToForm()">Suggest a Name for Our Baby Boy 🍼</button>
                     </div>
                     <div class="image-content"></div>
                 </div>
@@ -60,19 +60,6 @@
                     <h2>Top Upvoted Names</h2>
                     <div class="categories">
                         <div class="category">
-                            <h3>General Names</h3>
-                            <ul id="topGeneralNames">
-                                {% for name in top_general %}
-                                    <li>
-                                        <div class="name name-entry" data-name-id="{{ name.id }}">
-                                            <span class="name">{{ name.name_suggestion }} ({{ name.upvotes }} upvotes)</span>
-                                            <button class="upvote-button">👍</button>
-                                        </div>                                        
-                                    </li>
-                                {% endfor %}
-                            </ul>
-                        </div>
-                        <div class="category">
                             <h3>Kinyarwanda Names</h3>
                             <ul id="topKinyarwandaNames">
                                 {% for name in top_kinyarwanda %}
@@ -81,6 +68,19 @@
                                             <span class="name">{{ name.name_suggestion }} ({{ name.upvotes }} upvotes)</span>
                                             <button class="upvote-button">👍</button>
                                         </div>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <div class="category">
+                            <h3>General Names</h3>
+                            <ul id="topGeneralNames">
+                                {% for name in top_general %}
+                                    <li>
+                                        <div class="name name-entry" data-name-id="{{ name.id }}">
+                                            <span class="name">{{ name.name_suggestion }} ({{ name.upvotes }} upvotes)</span>
+                                            <button class="upvote-button">👍</button>
+                                        </div>                                        
                                     </li>
                                 {% endfor %}
                             </ul>
@@ -167,14 +167,19 @@
             if (modal) {
                 modal.style.display = 'block';
 
-                // Optional: Close the modal when clicking outside of it
+                // Close the modal after 5 seconds
+                setTimeout(function() {
+                    modal.style.display = 'none';
+                }, 3000);
+
                 window.onclick = function(event) {
                     if (event.target === modal) {
                         modal.style.display = 'none';
                     }
-                }
+                };
             }
         });
+
         document.getElementById('contactForm').addEventListener('submit', function(event) {
             const button = this.querySelector('button[type="submit"]');
             const buttonText = button.querySelector('.button-text');

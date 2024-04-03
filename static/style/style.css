@@ -37,6 +37,7 @@ body, html {
     width: 100%;
     justify-content: space-between; /* Adjusts alignment */
     align-items: center; /* Vertically centers content */
+    flex-direction: row;
 }
 
 .text-content {
@@ -315,12 +316,49 @@ button[type="submit"]:hover {
     .categories {
         flex-direction: column;
     }
-    .center-content{
+    .center-content {
         flex-direction: column;
     }
-    .forms-container{
+    .forms-container {
         flex-direction: column;
         width: 90%;
+    }
+
+    .content-container{
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .text-content {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .image-content {
+        margin-top: 20px;
+        width: 100%; /* Use width instead of max-width */
+        max-width: 100%; /* Adjust width for text readability */
+        background-size: cover; /* Ensures the background covers the div */
+        background-position: center; /* Centers the background image */
+    }
+    
+    /* Adjusting font sizes for smaller screens */
+    body, p, button, input, textarea, label, h1, h2, h3, h4, h5, h6 {
+        font-size: 14px; /* Example size; adjust as needed */
+    }
+
+    /* Specific adjustments can be added as needed for different elements */
+    h1 {
+        font-size: 20px; /* Smaller h1 for smaller screens */
+    }
+    h2 {
+        font-size: 18px; /* Smaller h2 for smaller screens */
+    }
+    .button-text, button[type="submit"] {
+        font-size: 16px; /* Smaller button text */
+    }
+    .main-container p{
+        font-size: 16px; /* Smaller button text */
     }
 }
 
