@@ -1,16 +1,59 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.sql.expression import func
+from flask_mail import Mail, Message
+import logging
+from logging.handlers import RotatingFileHandler
+import os
 
 app = Flask(__name__, template_folder='templates', static_folder='static')
 app.secret_key = 'uyvdyu26gfr68348gf8x2fyb348g643grfx'
 
-# Configure SQLAlchemy
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///suggestions.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+app.config['MAIL_PORT'] = 587
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USERNAME'] = 'cedricrugamba@gmail.com'
+app.config['MAIL_PASSWORD'] = 'rmfl sdox clbv thjb'
+app.config['MAIL_DEFAULT_SENDER'] = 'cedricrugamba@gmail.com'
 
 # Initialize SQLAlchemy
 db = SQLAlchemy(app)
+mail = Mail(app)
+
+# Set up logging
+if not app.debug:
+    if not os.path.exists('logs'):
+        os.mkdir('logs')
+
+    file_handler = RotatingFileHandler('logs/system.log', maxBytes=10240, backupCount=10)
+    file_handler.setFormatter(logging.Formatter(
+        '%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]'))
+    file_handler.setLevel(logging.INFO)
+    app.logger.addHandler(file_handler)
+
+    app.logger.setLevel(logging.INFO)
+    app.logger.info('Your application startup')
+
+@app.route('/send_message', methods=['POST'])
+def send_message():
+    name = request.form.get('contactName')
+    email = request.form.get('contactEmail')
+    message = request.form.get('contactMessage')
+
+    msg = Message("Message from Your Site",
+                  recipients=["rugambacedric@gmail.com"],
+                  body=f"Name: {name}\nEmail: {email}\nMessage: {message}")
+    
+    try:
+        mail.send(msg)
+        flash('Your message has been sent successfully!', 'success')
+    except Exception as e:
+        flash('An error occurred while sending your message. Please try again.', 'error')
+        app.logger.error(f"Failed to send message: {e}")
+
+    return redirect(url_for('home'))
 
 # Define your model with an upvotes column
 class NameSuggestion(db.Model):
