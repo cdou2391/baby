@@ -17,11 +17,21 @@
                             As we prepare for his arrival, one of the biggest joys (and challenges) we face is choosing the perfect name for him.
                             This is where we need your help.</p>
                         <p>That's why we've created this platform - to gather name suggestions from our beloved friends and family.</p>
-                        <button onclick="scrollToForm()">Suggest a Name for Our Baby Boy 🍼</button>
+                        <button id="toggleCountdown">Show/Hide Countdown</button>
+                        <div class="countdown-container" style="display: none;"> <!-- Initially hidden -->
+                            <h2>Countdown to Baby's Arrival</h2>
+                            <div id="countdown">
+                                <div><span id="days"></span>Days</div>
+                                <div><span id="hours"></span>Hours</div>
+                                <div><span id="minutes"></span>Minutes</div>
+                                <div><span id="seconds"></span>Seconds</div>
+                            </div>
+                        </div>
+                        <button onclick="scrollToForm()" class="scrollButton">Suggest a Name for Our Baby Boy 🍼</button>
                     </div>
                     <div class="image-content"></div>
                 </div>
-            </div>
+            </div>           
         </div>
         <div class="center-content">
             <div class="left-content">
@@ -219,6 +229,38 @@
                 });
             });
         });
+        document.getElementById('toggleCountdown').addEventListener('click', function() {
+            const countdownContainer = document.querySelector('.countdown-container');
+            if (countdownContainer.style.display === "none") {
+                countdownContainer.style.display = "block";
+            } else {
+                countdownContainer.style.display = "none";
+            }
+        });
+
+        function updateCountdown() {
+            const now = new Date();
+            const year = now.getMonth() > 5 || (now.getMonth() === 5 && now.getDate() > 12) ? now.getFullYear() + 1 : now.getFullYear();
+            const countdownDate = new Date(`June 12, ${year} 00:00:00`).getTime();
+
+            const distance = countdownDate - now;
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("days").innerText = days;
+            document.getElementById("hours").innerText = hours;
+            document.getElementById("minutes").innerText = minutes;
+            document.getElementById("seconds").innerText = seconds;
+
+            if (distance < 0) {
+                clearInterval(updateInterval);
+                document.querySelector('.countdown-container').innerHTML = "<h2>The Baby Has Arrived! 🎉</h2>";
+            }
+        }
+
+        const updateInterval = setInterval(updateCountdown, 1000);
     </script>
 </body>
 </html>

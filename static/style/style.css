@@ -77,6 +77,47 @@ body, html {
     transform: translateY(-2px); /* Slight lift */
 }
 
+#toggleCountdown{
+    margin-bottom: 10px;
+}
+
+.countdown-container {
+    text-align: center;
+    margin: 5px 0 20px 0;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Soft shadow for depth */
+}
+
+.countdown-container h2 {
+    color: #333; /* Dark text for contrast */
+}
+
+#countdown {
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* Space between countdown parts */
+}
+
+#countdown div {
+    flex-grow: 1;
+}
+
+#countdown span {
+    display: block;
+    font-size: 2em; /* Large, easy-to-read numbers */
+    color: #007bff; /* Theme color */
+}
+
+#countdown div:not(:last-child) span {
+    margin-bottom: 5px;
+}
+
+.scrollButton{
+    margin-top: 10px;
+}
+
+
 .center-content{
     display: flex;
     flex-direction: row;
